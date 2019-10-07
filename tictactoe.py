@@ -10,7 +10,7 @@ class TicTacToe(object):
 		self.variants = ["X", "0"]
 
 
-	def displayPlayingField(self):
+	def display_playing_field(self):
 		""" Display playing field. """
 		print("{} | {} | {}".format(self.playingField[0], self.playingField[1], self.playingField[2]))
 		print("--+---+--")
@@ -19,7 +19,7 @@ class TicTacToe(object):
 		print("{} | {} | {}".format(self.playingField[6], self.playingField[7], self.playingField[8]))
 
 
-	def inputUserMove(self):
+	def input_user_move(self):
 		""" User input processing. """
 		while True:
 			self.move = input()
@@ -27,7 +27,7 @@ class TicTacToe(object):
 			if self.move in self.checkingString:
 				if self.playingField[int(self.move) - 1] not in self.variants:
 					self.move = int(self.move) - 1
-					self.setMove()
+					self.set_move()
 					break
 				else:
 					print("This cell is not free! Try again.")
@@ -35,7 +35,7 @@ class TicTacToe(object):
 				print("Incorrect cell! Try again!")
 
 
-	def setMove(self):
+	def set_move(self):
 		""" Set user move. """
 		if self.order == 1:
 			self.playingField[self.move] = "X"
@@ -43,7 +43,7 @@ class TicTacToe(object):
 			self.playingField[self.move] = "0"
 
 
-	def checkWin(self):
+	def check_win(self):
 		""" Checking win. """
 		if self.playingField[0] == self.playingField[1] == self.playingField[2]:
 			self.win[0] = True
@@ -73,7 +73,7 @@ class TicTacToe(object):
 			self.win[1] = self.variants.index(self.playingField[2]) + 1
 
 
-	def checkDraw(self):
+	def check_draw(self):
 		""" Check draw situation. """
 		self.counter = 0
 
@@ -85,7 +85,7 @@ class TicTacToe(object):
 			self.draw = True
 
 
-	def printCongratulation(self):
+	def print_congratulation(self):
 		""" Print congratulation to winner. """
 		print("Congratulations!")
 
@@ -101,12 +101,12 @@ class TicTacToe(object):
 				print("Draw!")
 
 
-	def printHello(self):
+	def print_hello(self):
 		""" Print hello-message to user(s). """
 		print("Hello! You are in tic tac toe. Press 'Enter' to start game!")
 
 
-	def printInvitationToMove(self):
+	def print_invitation_to_move(self):
 		""" Print invitation for users. """
 		if self.order == 1:
 			print("Move for first player.")
@@ -118,29 +118,26 @@ class TicTacToe(object):
 
 	def play(self):
 		""" The main part. Start game process. """
-		self.printHello()
-		self.displayPlayingField()
+		self.print_hello()
+		self.display_playing_field()
 
 		while self.win[0] != True and self.draw != True:
-			self.printInvitationToMove()
-			self.inputUserMove()
-			self.setMove()
-			self.displayPlayingField()
+			self.print_invitation_to_move()
+			self.input_user_move()
+			self.set_move()
+			self.display_playing_field()
 
 			if self.order == 1:
 				self.order = 2
 			elif self.order == 2:
 				self.order = 1
 
-			self.checkDraw()
-			self.checkWin()
+			self.check_draw()
+			self.check_win()
 
-		self.printCongratulation()
+		self.print_congratulation()
 
 
 if __name__ == '__main__':
 	game = TicTacToe()
 	game.play()
-	# game.playingField = ["X", "X", "X", 4, 5, 6, 7, 8, 9]
-	# game.checkWin()
-	# print(game.win[0])
