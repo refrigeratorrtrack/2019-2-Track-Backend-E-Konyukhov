@@ -41,6 +41,8 @@ class TicTacToe(object):
 			self.playingField[self.move] = "X"
 		elif self.order == 2:
 			self.playingField[self.move] = "0"
+		else:
+			return False
 
 
 	def check_win(self):
@@ -112,6 +114,8 @@ class TicTacToe(object):
 			print("Move for first player.")
 		elif self.order == 2:
 			print("Move for second player.")
+		else:
+			return False
 
 		print("Choose free cell.")
 
