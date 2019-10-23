@@ -1,9 +1,9 @@
 class TicTacToe(object):
     def __init__(self):
         """ Initializing. """
-        self.fieldSize = 3
-        self.playingField = [i for i in range(1, self.fieldSize ** 2 + 1)]
-        self.checkingString = [str(i) for i in range(1, self.fieldSize**2+1)]
+        self.field_size = 3
+        self.playing_field = [i for i in range(1, self.field_size**2+1)]
+        self.checking_string = [str(i) for i in range(1, self.field_size**2+1)]
         self.order = 1
         self.win = [False, 0]
         self.draw = False
@@ -11,25 +11,25 @@ class TicTacToe(object):
 
     def display_playing_field(self):
         """ Display playing field. """
-        print("{} | {} | {}".format(self.playingField[0],
-                                    self.playingField[1],
-                                    self.playingField[2]))
+        print("{} | {} | {}".format(self.playing_field[0],
+                                    self.playing_field[1],
+                                    self.playing_field[2]))
         print("--+---+--")
-        print("{} | {} | {}".format(self.playingField[3],
-                                    self.playingField[4],
-                                    self.playingField[5]))
+        print("{} | {} | {}".format(self.playing_field[3],
+                                    self.playing_field[4],
+                                    self.playing_field[5]))
         print("--+---+--")
-        print("{} | {} | {}".format(self.playingField[6],
-                                    self.playingField[7],
-                                    self.playingField[8]))
+        print("{} | {} | {}".format(self.playing_field[6],
+                                    self.playing_field[7],
+                                    self.playing_field[8]))
 
     def input_user_move(self):
         """ User input processing. """
         while True:
             self.move = input()
 
-            if self.move in self.checkingString:
-                if self.playingField[int(self.move) - 1] not in self.variants:
+            if self.move in self.checking_string:
+                if self.playing_field[int(self.move) - 1] not in self.variants:
                     self.move = int(self.move) - 1
                     self.set_move()
                     break
@@ -41,54 +41,59 @@ class TicTacToe(object):
     def set_move(self):
         """ Set user move. """
         if self.order == 1:
-            self.playingField[self.move] = "X"
+            self.playing_field[self.move] = "X"
         elif self.order == 2:
-            self.playingField[self.move] = "0"
+            self.playing_field[self.move] = "0"
         else:
             return False
 
     def check_win(self):
         """ Checking win. """
-        if self.playingField[0] == self.playingField[1]:
-            if self.playingField[1] == self.playingField[2]:
+        if self.playing_field[0] == self.playing_field[1]:
+            if self.playing_field[1] == self.playing_field[2]:
                 self.win[0] = True
-                self.win[1] = self.variants.index(self.playingField[0]) + 1
-        elif self.playingField[3] == self.playingField[4]:
-            if self.playingField[4] == self.playingField[5]:
-                self.win[0] = True
-                self.win[1] = self.variants.index(self.playingField[3]) + 1
-        elif self.playingField[6] == self.playingField[7]:
-            if self.playingField[7] == self.playingField[8]:
-                self.win[0] = True
-                self.win[1] = self.variants.index(self.playingField[6]) + 1
+                self.win[1] = self.variants.index(self.playing_field[0]) + 1
 
-        if self.playingField[0] == self.playingField[3]:
-            if self.playingField[3] == self.playingField[6]:
+        if self.playing_field[3] == self.playing_field[4]:
+            if self.playing_field[4] == self.playing_field[5]:
                 self.win[0] = True
-                self.win[1] = self.variants.index(self.playingField[0]) + 1
-        elif self.playingField[1] == self.playingField[4]:
-            if self.playingField[4] == self.playingField[7]:
-                self.win[0] = True
-                self.win[1] = self.variants.index(self.playingField[1]) + 1
-        elif self.playingField[2] == self.playingField[5]:
-            if self.playingField[5] == self.playingField[8]:
-                self.win[0] = True
-                self.win[1] = self.variants.index(self.playingField[2]) + 1
+                self.win[1] = self.variants.index(self.playing_field[3]) + 1
 
-        if self.playingField[0] == self.playingField[4]:
-            if self.playingField[4] == self.playingField[8]:
+        if self.playing_field[6] == self.playing_field[7]:
+            if self.playing_field[7] == self.playing_field[8]:
                 self.win[0] = True
-                self.win[1] = self.variants.index(self.playingField[0]) + 1
-        elif self.playingField[2] == self.playingField[4]:
-            if self.playingField[4] == self.playingField[6]:
+                self.win[1] = self.variants.index(self.playing_field[6]) + 1
+
+        if self.playing_field[0] == self.playing_field[3]:
+            if self.playing_field[3] == self.playing_field[6]:
                 self.win[0] = True
-                self.win[1] = self.variants.index(self.playingField[2]) + 1
+                self.win[1] = self.variants.index(self.playing_field[0]) + 1
+
+        if self.playing_field[1] == self.playing_field[4]:
+            if self.playing_field[4] == self.playing_field[7]:
+                self.win[0] = True
+                self.win[1] = self.variants.index(self.playing_field[1]) + 1
+
+        if self.playing_field[2] == self.playing_field[5]:
+            if self.playing_field[5] == self.playing_field[8]:
+                self.win[0] = True
+                self.win[1] = self.variants.index(self.playing_field[2]) + 1
+
+        if self.playing_field[0] == self.playing_field[4]:
+            if self.playing_field[4] == self.playing_field[8]:
+                self.win[0] = True
+                self.win[1] = self.variants.index(self.playing_field[0]) + 1
+
+        if self.playing_field[2] == self.playing_field[4]:
+            if self.playing_field[4] == self.playing_field[6]:
+                self.win[0] = True
+                self.win[1] = self.variants.index(self.playing_field[2]) + 1
 
     def check_draw(self):
         """ Check draw situation. """
         self.counter = 0
 
-        for cell in self.playingField:
+        for cell in self.playing_field:
             if cell == "X" or cell == "0":
                 self.counter += 1
 
@@ -103,9 +108,9 @@ class TicTacToe(object):
             print("It is a draw! Both win!")
 
         if self.win[0]:
-            if (self.win[1] == 1):
+            if self.win[1] == 1:
                 print("First user wins!")
-            elif (self.win[1] == 2):
+            elif self.win[1] == 2:
                 print("Second user wins!")
             elif self.win[1] == 3:
                 print("Draw!")
@@ -130,7 +135,6 @@ class TicTacToe(object):
         self.print_hello()
         self.display_playing_field()
 
-        # while self.win[0] != True and self.draw != True:
         while not self.win[0] and not self.draw:
             self.print_invitation_to_move()
             self.input_user_move()

@@ -6,11 +6,11 @@ class TestGameMethods(unittest.TestCase):
     """ Tests. """
     def test_check_win(self):
         self.game = tictactoe.TicTacToe()
-        self.game.playingField = ["X", "X", "X", 4, 5, 6, 7, 8, 9]
+        self.game.playing_field = ["X", "X", "X", 4, 5, 6, 7, 8, 9]
         self.game.check_win()
         self.assertTrue(self.game.win[0])
         self.game = tictactoe.TicTacToe()
-        self.game.playingField = ["X", "0", "X", 4, 5, 6, 7, 8, 9]
+        self.game.playing_field = ["X", "0", "X", "0", "X", "X", "0", "X", "0"]
         self.game.check_win()
         self.assertFalse(self.game.win[0])
 
@@ -26,7 +26,7 @@ class TestGameMethods(unittest.TestCase):
 
     def test_check_draw(self):
         self.game = tictactoe.TicTacToe()
-        self.game.playingField = ["X", "0", "X", "0", "X", "X", "0", "X", "0"]
+        self.game.playing_field = ["X", "0", "X", "0", "X", "X", "0", "X", "0"]
         self.game.check_draw()
         self.assertTrue(self.game.draw)
         self.game = tictactoe.TicTacToe()
