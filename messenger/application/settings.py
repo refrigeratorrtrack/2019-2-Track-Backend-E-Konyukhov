@@ -25,7 +25,13 @@ SECRET_KEY = '@rq#n77dw!ksr^j9#$voz#b@-osbf@+wq-r#p1xg&kdr8pyo58'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True # WTF?!.
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['10.0.2.15', '192.168.0.106', '127.0.0.1', 'backend']
+AUTH_USER_MODEL = "userprofile.User"
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'login'
 
 
 # Application definition
@@ -37,13 +43,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'chats',
+    'userprofile',
+    'blog',
+    'social_django',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -62,6 +72,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
             ],
         },
     },
@@ -69,14 +80,27 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'application.wsgi.application'
 
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.linkedin.LinkedinOAuth2',
+    'social_core.backends.instagram.InstagramOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+    'social_core.backends.vk.VKOAuth2',
+]
+
+
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'messenger_db',
+        'USER': 'refridge',
+        'PASSWORD': '17231723',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -99,6 +123,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+SOCIAL_AUTH_VK_OAUTH2_KEY = '7235549'
+SOCIAL_AUTH_VK_OAUTH2_SECRET = 'FjiibM9t2wffmTP4n9eQ'
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
+SOCIAL_AUTH_VK_PROFILE_EXTRA_PARAMS = {
+    'locale' : 'ru_RU',
+    'fields' : 'id, name, email, age_range',
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
